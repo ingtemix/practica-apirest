@@ -11,6 +11,8 @@ public interface TipoCatalogoService {
 	
 	public abstract List<TipoCatalogoModel> getAll() throws Practica01Exception;
 	
+	public abstract List<TipoCatalogoModel> getByName(String nombre) throws Practica01Exception;
+	
 	public abstract TipoCatalogoModel getById(long id) throws Practica01Exception;
 	
 	public abstract TipoCatalogoModel save(TipoCatalogoModel tipoCatalogo) throws Practica01Exception;

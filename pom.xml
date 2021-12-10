@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.6</version>
+		<version>2.2.6.RELEASE</version>
+		<relativePath/>
 	</parent>
-
-	<groupId>com-apirest.mx.practica01</groupId>
-	<artifactId>Practica01</artifactId>
+	<groupId>com.apirest.mx.practicas</groupId>
+	<artifactId>PracticaApiREST</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Practica01</name>
-	<description>Práctica de creación de proyecto Spring Boot</description>
-
+	<packaging>war</packaging>
+	<name>PracticaApiREST</name>
+	<description>Práctica de API Rest y JPA</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>com.apirest.mx.practica01.Practica01Application</start-class>
 	</properties>
-
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
+	     	<groupId>org.springframework.boot</groupId>
+	     	<artifactId>spring-boot-starter-data-jpa</artifactId>
+    	</dependency>
+    	
+    	<dependency>
+      		<groupId>org.springframework.boot</groupId>
+      		<artifactId>spring-boot-starter-web</artifactId>
+    	</dependency>
+    	
+    	<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+    	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- JSON -->
@@ -45,12 +52,6 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -61,5 +62,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

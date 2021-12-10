@@ -19,7 +19,7 @@ import com.apirest.mx.practica01.service.TipoCatalogoService;
 @Service("tipoCatalogoServiceImpl")
 public class TipoCatalogoServiceImpl implements TipoCatalogoService {
 
-	@Autowired(required = false)
+	@Autowired
 	private TipoCatalogoRepository tipoCatalogoRepository;
 
 	@Autowired
@@ -43,7 +43,20 @@ public class TipoCatalogoServiceImpl implements TipoCatalogoService {
 
 			return tiposCatalogoModel;
 		} catch (Exception ex) {
-			throw new Practica01Exception(ex.getMessage());
+			throw new Practica01Exception(ex);
+		}
+	}
+	
+	@Override
+	public List<TipoCatalogoModel> getByName(String nombre) throws Practica01Exception {
+		try {
+			List<TipoCatalogo> tiposCatalogo = tipoCatalogoRepository.findByNombre(nombre);
+			List<TipoCatalogoModel> tiposCatalogoModel = new ArrayList<>();
+			tiposCatalogo.forEach(tipoCatalogo -> tiposCatalogoModel.add(tipoCatalogoConverter.convertTipoCatalogoToTipoCatalogoModel(tipoCatalogo)));
+
+			return tiposCatalogoModel;
+		} catch (Exception ex) {
+			throw new Practica01Exception(ex);
 		}
 	}
 

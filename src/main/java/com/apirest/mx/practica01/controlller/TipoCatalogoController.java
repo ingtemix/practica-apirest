@@ -32,7 +32,6 @@ public class TipoCatalogoController {
 	@GetMapping
 	public ResponseEntity<ResponseTipoCatalogo> getTotal() {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json charset=UTF-8");
 		ResponseTipoCatalogo response = null;
 		try {
 			long totalTiposCatalogo = tipoCatalogoService.getTotal();
@@ -47,7 +46,6 @@ public class TipoCatalogoController {
 	@GetMapping(value = "/all")
 	public ResponseEntity<ResponseTipoCatalogo> getAll() {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json charset=UTF-8");
 		ResponseTipoCatalogo response = null;
 		try {
 			List<TipoCatalogoModel> tiposCatalogo = tipoCatalogoService.getAll();
@@ -59,10 +57,23 @@ public class TipoCatalogoController {
 	}
 	
 	@CrossOrigin
+	@GetMapping(value = "/name/{nombre}")
+	public ResponseEntity<ResponseTipoCatalogo> getByName(@PathVariable("nombre") String nombre) {
+		HttpHeaders headers = new HttpHeaders();
+		ResponseTipoCatalogo response = null;
+		try {
+			List<TipoCatalogoModel> tiposCatalogo = tipoCatalogoService.getByName(nombre);
+			response = new ResponseTipoCatalogo(HttpStatus.OK.value(), HttpStatus.OK.name(), "TRANSACCION_EXITOSA", "Tipos de catalogo obtenido por nombre correctamente", tiposCatalogo);
+		} catch (Practica01Exception ex) {
+			response = new ResponseTipoCatalogo(HttpStatus.FORBIDDEN.value(), HttpStatus.FORBIDDEN.name(), "TRANSACCION_INCORRECTA", "Error al consultar el tipo de catalogo por nombre: " + ex.getMessage());
+		}
+		return new ResponseEntity<>(response, headers, HttpStatus.OK);
+	}
+	
+	@CrossOrigin
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ResponseTipoCatalogo> getById(@PathVariable("id") long idTipoCatalogo) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json charset=UTF-8");
 		ResponseTipoCatalogo response = null;
 		try {
 			TipoCatalogoModel tipoCatalogo = tipoCatalogoService.getById(idTipoCatalogo);
@@ -77,7 +88,6 @@ public class TipoCatalogoController {
 	@PostMapping
 	public ResponseEntity<ResponseTipoCatalogo> add(@RequestBody TipoCatalogoModel tipoCatalogo) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json charset=UTF-8");
 		ResponseTipoCatalogo response = null;
 		try {
 			TipoCatalogoModel tipoCatalogoModel = tipoCatalogoService.save(tipoCatalogo);
@@ -93,7 +103,6 @@ public class TipoCatalogoController {
 	@PutMapping
 	public ResponseEntity<ResponseTipoCatalogo> update(@RequestBody TipoCatalogoModel tipoCatalogo) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json charset=UTF-8");
 		ResponseTipoCatalogo response = null;
 		try {
 			TipoCatalogoModel tipoCatalogoModel = tipoCatalogoService.save(tipoCatalogo);
@@ -108,7 +117,6 @@ public class TipoCatalogoController {
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ResponseTipoCatalogo> delete(@PathVariable("id") long idTipoCatalogo) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json charset=UTF-8");
 		ResponseTipoCatalogo response = null;
 		try {
 			tipoCatalogoService.delete(idTipoCatalogo);
